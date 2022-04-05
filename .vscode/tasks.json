@@ -1,23 +1,26 @@
 {
+
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "echo",
             "type": "shell",
-            "label": "compile",
             "command": "g++",
             "args": [
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+                "${fileBasenameNoExtension}.exe"
+                // "-fexec-charset=GBK"//解决中文乱码
+            ]
         }
-    ]
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+    }
 }
