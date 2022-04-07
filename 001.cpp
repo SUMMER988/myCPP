@@ -1,11 +1,8 @@
 #include <iostream>
 #include <ctime>
-#include <cstdlib>
-
-using namespace std;
+#include <algorithm>
 
 int main()
 {
-    int nums[] = {9, 8, 7, 6, 5, 4};
-    //冒泡排序
+    std::cout << "OK" << std::endl;
 }
