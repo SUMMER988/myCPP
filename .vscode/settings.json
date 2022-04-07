@@ -1,0 +1,7 @@
+{
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.mouseWheelZoom": true,
+    "editor.padding.bottom": 1,
+    "editor.padding.top": 1
+}
