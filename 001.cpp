@@ -2,8 +2,9 @@
 #include <ctime>
 #include <algorithm>
 using namespace std;
-
-int main()
+// 单链表
+typedef struct LNode
 {
-    cout << "OK" << endl;
-}
+    int data;
+    struct LNode *next;
+} LNode, *LinkList;
