@@ -36,14 +36,15 @@ LinkList CreatList(vector<int> data)
     {
         return NULL;
     }
-    //头结点
-    LNode *head = (LinkList)malloc(sizeof(LNode));
+    // headNode
+    LNode *head = new LNode;
     head->data = data[0];
     head->next = NULL;
     LinkList p = head;
-    _for(i, 1, data.size())
+    for (size_t i = 1; i < data.size(); i++)
+
     {
-        LNode *s = (LinkList)malloc(sizeof(LNode));
+        LNode *s = new LNode;
         s->data = data[i];
         s->next = NULL;
         p->next = s;
@@ -54,12 +55,12 @@ LinkList CreatList(vector<int> data)
 //输出链表
 void PrintList(LinkList list)
 {
-    while (list != NULL)
+    while (list != nullptr)
     {
-        printf("%d ", list->data);
+        cout << list->data << " ";
         list = list->next;
     }
-    printf("\n");
+    cout << endl;
 }
 
 #pragma endregion
@@ -82,6 +83,7 @@ void DeleteXNode(LinkList &head, ElemType X)
 int main()
 {
     vector<int> data{2, 4, 6, 4, 6, 3, 6, 41};
+
     LinkList head;
     InitList(head);
     head = CreatList(data);
