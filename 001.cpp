@@ -8,3 +8,8 @@ typedef struct LNode
     int data;
     struct LNode *next;
 } LNode, *LinkList;
+
+int main()
+{
+    std::cout << "单链表" << std::endl;
+}
