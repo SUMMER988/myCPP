@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 typedef int ElemType;
-// 单链表
+// 单链表——按位序插入——不带头结点
 typedef struct LNode
 {
     ElemType data;
@@ -21,42 +21,41 @@ bool InitList(LinkList &L)
     L->length = 0;
     return true;
 }
-// 按位序插入——带头结点
 bool ListInsert(LinkList &L, int pos, ElemType e)
 {
     if (pos < 1)
     {
         return false;
     }
+    if (pos == 1)
+    {
+        LNode *s = new LNode;
+        s->data = e;
+        s->next = L;
+        L = s;
+        return true;
+    }
     LNode *p = L;
-    int j = 0;
+    int j = 1;
     while (p != nullptr && j < pos - 1)
     {
         p = p->next;
         j++;
     }
-    return InsertNextNode(p, e);
-}
-//指定结点的后插操作
-bool InsertNextNode(LNode *p, ElemType e)
-{
     if (!p)
     {
         return false;
     }
     LNode *s = new LNode;
-    if (!s)
-    {
-        return false;
-    }
     s->data = e;
     s->next = p->next;
     p->next = s;
+    L->length++;
     return true;
 }
 void PrintList(LinkList L)
 {
-    LNode *head = L->next;
+    LNode *head = L;
     while (head)
     {
         if (!head->next)
