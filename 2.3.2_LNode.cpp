@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 typedef int ElemType;
-// 单链表
+// 单链表——按位序插入——带头结点
 typedef struct LNode
 {
     ElemType data;
