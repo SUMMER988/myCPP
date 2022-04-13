@@ -128,16 +128,28 @@ bool ListDelete(LinkList &L, int pos, ElemType &e)
     return true;
 }
 // 删除指定结点
-bool DeleteNode(LNode *p)
+bool DeleteNode(LinkList &L, LNode *p)
 {
     if (!p)
     {
         return false;
     }
+    if (!p->next)
+    {
+        LNode *q = L;
+        while (q->next != p)
+        {
+            q = q->next;
+        }
+        free(p);
+        q->next = NULL;
+        return true;
+    }
+
     LNode *q = p->next;
     p->data = q->data;
     p->next = q->next;
-    delete q;
+    free(q);
     return true;
 }
 // 删除全部
@@ -149,7 +161,7 @@ void ListDeleteAll(LinkList &L)
     }
     ListDeleteAll(L->next);
     delete L->next;
-    L->next = nullptr;
+    L->next = NULL;
 }
 // 打印单链表元素
 void PrintList(LinkList L)
@@ -170,7 +182,7 @@ void PrintList(LinkList L)
 }
 // 判断表空
 
-bool EmptyList(LinkList L)
+bool IsEmpty(LinkList L)
 {
     return (!L->next);
 }
@@ -211,7 +223,7 @@ LNode *LocateElem(LinkList L, ElemType e)
 // 求表长
 int Length(LinkList L)
 {
-    if (EmptyList(L))
+    if (IsEmpty(L))
     {
         return 0;
     }
@@ -253,10 +265,14 @@ int main()
     TailInsert(L, 2);
     TailInsert(L, 3);
     TailInsert(L, 4);
+    TailInsert(L, 5);
+    TailInsert(L, 6);
     PrintList(L);
-    int deleteNum = -1;
-    ListDelete(L, 1, deleteNum);
-
+    cout << "执行操作——删除全部结点" << endl;
+    ListDeleteAll(L);
     PrintList(L);
-    cout << "deleteNum is " << deleteNum << endl;
+    if (IsEmpty(L))
+    {
+        cout << "已删除全部结点" << endl;
+    }
 }
