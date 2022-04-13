@@ -2,6 +2,7 @@
 #include <ctime>
 #include <algorithm>
 #include <vector>
+#include <limits>
 using namespace std;
 typedef int ElemType;
 // 单链表——带头结点
@@ -111,7 +112,7 @@ bool ListDelete(LinkList &L, int pos, ElemType &e)
     }
     int target = 0;
     LNode *p = L;
-    while (!p && target < pos - 1)
+    while (p && target < pos - 1)
     {
         p = p->next;
         target++;
@@ -252,7 +253,10 @@ int main()
     TailInsert(L, 2);
     TailInsert(L, 3);
     TailInsert(L, 4);
-    ListInsert(L, 5, 9);
+    PrintList(L);
+    int deleteNum = -1;
+    ListDelete(L, 1, deleteNum);
 
     PrintList(L);
+    cout << "deleteNum is " << deleteNum << endl;
 }
