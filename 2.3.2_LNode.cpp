@@ -223,11 +223,11 @@ LNode *LocateElem(LinkList L, ElemType e)
 // 求表长
 int Length(LinkList L)
 {
+    int len = 0;
     if (IsEmpty(L))
     {
-        return 0;
+        return len;
     }
-    int len = 0;
     LNode *p = L->next;
     while (p)
     {
@@ -267,12 +267,6 @@ int main()
     TailInsert(L, 4);
     TailInsert(L, 5);
     TailInsert(L, 6);
+    cout << Length(L) << endl;
     PrintList(L);
-    cout << "执行操作——删除全部结点" << endl;
-    ListDeleteAll(L);
-    PrintList(L);
-    if (IsEmpty(L))
-    {
-        cout << "已删除全部结点" << endl;
-    }
 }
