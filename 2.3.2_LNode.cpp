@@ -247,8 +247,11 @@ int main()
 
     LinkList L;
     InitList(L);
+    TailInsert(L, 0);
     TailInsert(L, 1);
     TailInsert(L, 2);
     TailInsert(L, 3);
     TailInsert(L, 4);
+
+    PrintList(L);
 }
