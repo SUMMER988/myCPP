@@ -135,17 +135,34 @@ void ReverseList(LinkList &L)
     {
         return;
     }
-
     LNode *p = L;
-    LinkList newLink = NULL;
+    LNode *s = NULL;
     while (p)
     {
         L = L->next;
-        p->next = newLink;
-        newLink = p;
+        p->next = s;
+        s = p;
         p = L;
     }
-    L = newLink;
+    L = s;
+}
+// 表逆置
+void ReverseList1(LinkList &L)
+{
+    if (!L || !L->next)
+    {
+        return;
+    }
+    LNode *p = L;
+    LNode *pre = NULL, *q;
+    while (p)
+    {
+        q = p->next;
+        p->next = pre;
+        pre = p;
+        p = q;
+    }
+    L = pre;
 }
 int main()
 {
@@ -156,6 +173,6 @@ int main()
     TailInsert(L, 3);
     TailInsert(L, 4);
     PrintList(L);
-    ReverseList(L);
+    ReverseList1(L);
     PrintList(L);
 }
