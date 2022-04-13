@@ -1,75 +1,54 @@
 #include <iostream>
-using namespace std;
 #include <vector>
-
-//链表结点结构
-class ListNode
+#include <algorithm>
+using namespace std;
+#define MaxSize 10
+typedef int ElemType;
+typedef struct LNode
 {
-public:
-    int data;                 //数据域
-    ListNode *next = nullptr; //指针域
-
-    ListNode(int val) //有参构造，data赋值
-    {
-        data = val;
-    }
-};
-
-vector<int> inputV()
+    ElemType data;
+    struct LNode *next;
+} LNode, *LinkList;
+bool initList(LinkList &L)
 {
-    int n;
-    cout << "请输入待排序组元素的个数" << endl;
-    cin >> n;
-
-    vector<int> nums;
-    cout << "请输入待排序组" << endl;
-
-    for (int i = 0; i < n; i++)
+    L = new LNode;
+    if (!L)
     {
-        int temp;
-        cin >> temp;
-        nums.push_back(temp);
+        return false;
     }
-    return nums;
+    L->next = nullptr;
+    return true;
 }
-
-//创建链表
-ListNode *creat(vector<int> &nums)
+LinkList List_TailInsert(LinkList &L)
 {
-    //创建头节点
-    ListNode *head = nullptr;
-    head = new ListNode(0); //头结点数据域可为空
-
-    ListNode *p = head; //记录头指针
-    for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++)
+    int num;
+    L = new LNode;
+    LNode *r = L;
+    LNode *s;
+    while (cin >> num && num != 999)
     {
-        ListNode *pNewNode = new ListNode(*it); //创建新结点
-        p->next = pNewNode;                     //上个节点指针域放新节点的地址
-
-        p = pNewNode; //更新结点
+        s = new LNode;
+        s->data = num;
+        r->next = s;
+        r = s;
     }
-    p->next = nullptr;
-    return head;
+    r->next = nullptr;
+    return L;
 }
-
-void printList(ListNode *L) //传入头指针,利用头指针可找到整个链表
+void printList(LinkList L)
 {
-    while (L->next)
+    LNode *p = L->next;
+    while (p->next)
     {
-        L = L->next; //头结点数据不用
-        cout << L->data << " ";
+        cout << p->data << "->";
+        p = p->next;
     }
-    cout << endl;
+    cout << p->data << endl;
 }
-
 int main()
 {
-    vector<int> nums;
-    nums = inputV(); // inputNum()用户输入一组数字,保存在vector中
-
-    ListNode *head = nullptr;
-    head = creat(nums);
-    printList(head);
-
-    return 0;
+    LinkList L;
+    initList(L);
+    List_TailInsert(L);
+    printList(L);
 }

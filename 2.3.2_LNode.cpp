@@ -9,7 +9,6 @@ typedef int ElemType;
 typedef struct LNode
 {
     ElemType data;
-    struct LNode *head, *tail;
     struct LNode *next;
 } LNode, *LinkList;
 bool InitList(LinkList &L)
@@ -20,8 +19,6 @@ bool InitList(LinkList &L)
         return false;
     }
     L->next = NULL;
-    L->head = L;
-    L->tail = L;
     return true;
 }
 // 头插法
@@ -38,17 +35,25 @@ bool HeadInsert(LinkList &L, ElemType e)
     return true;
 }
 // 尾插法
-bool TailInsert(LinkList &L, ElemType e)
+bool TailInsert(LinkList &L)
 {
     if (!L)
     {
         return false;
     }
-    LNode *p = new LNode;
-    p->data = e;
-    p->next = L->tail->next;
-    L->tail->next = p;
-    L->tail = p;
+    LNode *r = L;
+    LNode *s;
+    int size, num;
+    cin >> size;
+    while (size-- > 0)
+    {
+        s = new LNode;
+        cin >> num;
+        s->data = num;
+        r->next = s;
+        r = s;
+    }
+    r->next = nullptr;
     return true;
 }
 // 指定结点的后插操作
@@ -166,19 +171,13 @@ void ListDeleteAll(LinkList &L)
 // 打印单链表元素
 void PrintList(LinkList L)
 {
-    LNode *head = L->next;
-    while (head)
+    LNode *p = L->next;
+    while (p->next)
     {
-        if (!head->next)
-        {
-            cout << head->data << endl;
-        }
-        else
-        {
-            cout << head->data << "->";
-        }
-        head = head->next;
+        cout << p->data << "->";
+        p = p->next;
     }
+    cout << p->data << endl;
 }
 // 判断表空
 
@@ -260,13 +259,7 @@ int main()
 
     LinkList L;
     InitList(L);
-    TailInsert(L, 0);
-    TailInsert(L, 1);
-    TailInsert(L, 2);
-    TailInsert(L, 3);
-    TailInsert(L, 4);
-    TailInsert(L, 5);
-    TailInsert(L, 6);
+    TailInsert(L);
     cout << Length(L) << endl;
     PrintList(L);
 }
