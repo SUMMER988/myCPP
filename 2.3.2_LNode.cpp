@@ -95,7 +95,7 @@ bool ListInsert(LinkList &L, int pos, ElemType e)
     }
     LNode *p = L;
     int j = 0;
-    while (p != nullptr && j < pos - 1)
+    while (p && j < pos - 1)
     {
         p = p->next;
         j++;
@@ -252,6 +252,7 @@ int main()
     TailInsert(L, 2);
     TailInsert(L, 3);
     TailInsert(L, 4);
+    ListInsert(L, 5, 9);
 
     PrintList(L);
 }
