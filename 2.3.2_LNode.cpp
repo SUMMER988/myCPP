@@ -22,16 +22,24 @@ bool InitList(LinkList &L)
     return true;
 }
 // 头插法
-bool HeadInsert(LinkList &L, ElemType e)
+bool HeadInsert(LinkList &L)
 {
     if (!L)
     {
         return false;
     }
-    LNode *p = new LNode;
-    p->data = e;
-    p->next = L->next;
-    L->next = p;
+    LNode *head = L;
+    LNode *s;
+    int size, num;
+    cin >> size;
+    while (size-- > 0)
+    {
+        s = new LNode;
+        cin >> num;
+        s->data = num;
+        s->next = head->next;
+        head->next = s;
+    }
     return true;
 }
 // 尾插法
@@ -254,12 +262,32 @@ LNode *ReverseList(LinkList &L)
     }
     return L;
 }
+// 逆置
+LNode *ReverseList0(LinkList &L)
+{
+    if (!L)
+    {
+        return NULL;
+    }
+    LNode *p = L->next;
+    LNode *q = nullptr;
+    L->next = nullptr;
+    while (p)
+    {
+        q = p->next;
+        p->next = L->next;
+        L->next = p;
+        p = q;
+    }
+    return L;
+}
 int main()
 {
 
     LinkList L;
     InitList(L);
     TailInsert(L);
-    cout << Length(L) << endl;
+    PrintList(L);
+    ReverseList0(L);
     PrintList(L);
 }
