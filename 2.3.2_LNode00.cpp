@@ -3,11 +3,10 @@
 #include <algorithm>
 using namespace std;
 typedef int ElemType;
-// 单链表——按位序插入——不带头结点
+// 单链表——不带头结点
 typedef struct LNode
 {
     ElemType data;
-    int length;
     struct LNode *next;
 } LNode, *LinkList;
 bool InitList(LinkList &L)
@@ -17,8 +16,7 @@ bool InitList(LinkList &L)
     {
         return false;
     }
-    L->next = nullptr;
-    L->length = 0;
+    L = NULL;
     return true;
 }
 bool ListInsert(LinkList &L, int pos, ElemType e)
@@ -50,26 +48,79 @@ bool ListInsert(LinkList &L, int pos, ElemType e)
     s->data = e;
     s->next = p->next;
     p->next = s;
-    L->length++;
     return true;
 }
 void PrintList(LinkList L)
 {
-    LNode *head = L;
-    while (head)
+    LNode *p = L;
+    while (p)
     {
-        if (!head->next)
+        if (!p->next)
         {
-            cout << head->data << endl;
+            cout << p->data << endl;
         }
         else
         {
-            cout << head->data << "->";
+            cout << p->data << "->";
         }
-        head = head->next;
+        p = p->next;
     }
+}
+
+bool TailInsert(LinkList &L, ElemType e)
+{
+    if (L == NULL)
+    {
+        LNode *s = new LNode;
+        s->next = NULL;
+        s->data = e;
+        L = s;
+        return true;
+    }
+
+    LNode *p = L;
+    while (p->next != NULL)
+    {
+        p = p->next;
+    }
+    LNode *s = new LNode;
+    s->next = NULL;
+    s->data = e;
+    p->next = s;
+
+    return true;
+}
+bool EmptyList(LinkList L)
+{
+    return (L == NULL);
+}
+void ReverseList(LinkList &L)
+{
+    if (!L || !L->next)
+    {
+        return;
+    }
+
+    LNode *p = L;
+    LinkList newLink = NULL;
+    while (p)
+    {
+        L = L->next;
+        p->next = newLink;
+        newLink = p;
+        p = L;
+    }
+    L = newLink;
 }
 int main()
 {
-    LinkList L = nullptr;
+    LinkList L;
+    InitList(L);
+    TailInsert(L, 1);
+    TailInsert(L, 2);
+    TailInsert(L, 3);
+    TailInsert(L, 4);
+    PrintList(L);
+    ReverseList(L);
+    PrintList(L);
 }

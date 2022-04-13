@@ -1,9 +1,10 @@
 #include <iostream>
 #include <ctime>
 #include <algorithm>
+#include <vector>
 using namespace std;
 typedef int ElemType;
-// 单链表
+// 单链表——带头结点
 typedef struct LNode
 {
     ElemType data;
@@ -17,9 +18,9 @@ bool InitList(LinkList &L)
     {
         return false;
     }
+    L->next = NULL;
     L->head = L;
     L->tail = L;
-    L->next = nullptr;
     return true;
 }
 // 头插法
@@ -172,13 +173,82 @@ bool EmptyList(LinkList L)
 {
     return (!L->next);
 }
+// 按位查找
+LNode *GetElem(LinkList L, int pos)
+{
+    if (pos == 0)
+    {
+        return L;
+    }
+    if (pos < 1)
+    {
+        return NULL;
+    }
+    int target = 1;
+    LNode *p = L->next;
+    while (p && target < pos)
+    {
+        p = p->next;
+        target++;
+    }
+    return p;
+}
+// 按值查找
+LNode *LocateElem(LinkList L, ElemType e)
+{
+    if (!L)
+    {
+        return NULL;
+    }
+    LNode *p = L->next;
+    while (p && p->data != e)
+    {
+        p = p->next;
+    }
+    return p;
+}
+// 求表长
+int Length(LinkList L)
+{
+    if (EmptyList(L))
+    {
+        return 0;
+    }
+    int len = 0;
+    LNode *p = L->next;
+    while (p)
+    {
+        len++;
+        p = p->next;
+    }
+    return len;
+}
+// 逆置
+LNode *ReverseList(LinkList &L)
+{
+    if (!L)
+    {
+        return NULL;
+    }
+    LNode *p = L->next;
+    LNode *q = p;
+    L->next = NULL;
+    while (p)
+    {
+        q = p->next;
+        p->next = L->next;
+        L->next = p;
+        p = q;
+    }
+    return L;
+}
 int main()
 {
+
     LinkList L;
     InitList(L);
     TailInsert(L, 1);
     TailInsert(L, 2);
     TailInsert(L, 3);
     TailInsert(L, 4);
-    PrintList(L);
 }
