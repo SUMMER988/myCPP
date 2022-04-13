@@ -90,10 +90,45 @@ bool TailInsert(LinkList &L, ElemType e)
 
     return true;
 }
-bool EmptyList(LinkList L)
+
+// 判断表是否为空
+bool IsEmpty(LinkList L)
 {
     return (L == NULL);
 }
+
+// 按值查找
+LNode *LocateElem(LinkList L, ElemType e)
+{
+    if (!L)
+    {
+        return NULL;
+    }
+    LNode *p = L;
+    while (p && p->data != e)
+    {
+        p = p->next;
+    }
+    return p;
+}
+
+// 求表长
+int Length(LinkList L)
+{
+    int len = 0;
+    if (IsEmpty(L))
+    {
+        return len;
+    }
+    LNode *p = L;
+    while (p)
+    {
+        len++;
+        p = p->next;
+    }
+    return len;
+}
+// 表逆置
 void ReverseList(LinkList &L)
 {
     if (!L || !L->next)
