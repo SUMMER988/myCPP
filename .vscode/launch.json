@@ -41,6 +41,13 @@
                 }
             ]
 
-        }
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "E:\\LearnFrontEnd\\LearnFrontEnd\\Myhtml\\000000.html",
+            "webRoot": "${workspaceFolder}"
+        },
     ]
 }
