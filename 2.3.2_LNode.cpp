@@ -50,13 +50,12 @@ bool TailInsert(LinkList &L)
         return false;
     }
     LNode *r = L;
-    LNode *s;
-    int size, num;
-    cin >> size;
-    while (size-- > 0)
+    LNode *s = nullptr;
+    // make 'num' to hold the value to the node
+    int num;
+    while (std::cin >> num)
     {
         s = new LNode;
-        cin >> num;
         s->data = num;
         r->next = s;
         r = s;
@@ -235,11 +234,11 @@ int Length(LinkList L)
     {
         return len;
     }
-    LNode *p = L->next;
-    while (p)
+
+    while (L->next)
     {
         len++;
-        p = p->next;
+        L = L->next;
     }
     return len;
 }
@@ -288,6 +287,10 @@ int main()
     InitList(L);
     TailInsert(L);
     PrintList(L);
+    ReverseList0(L);
+    PrintList(L);
+    std::cout << "The length of List is " << Length(L) << std::endl;
+
     ReverseList0(L);
     PrintList(L);
 }

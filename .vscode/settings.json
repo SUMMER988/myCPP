@@ -3,5 +3,20 @@
     "editor.hideCursorInOverviewRuler": true,
     "editor.mouseWheelZoom": true,
     "editor.padding.bottom": 1,
-    "editor.padding.top": 1
+    "editor.padding.top": 1,
+    "files.associations": {
+        "*.js": "javascript",
+        "*.c": "c",
+        "iostream": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
+    },
+    "editor.formatOnSave": true,
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 4}",
+
 }
