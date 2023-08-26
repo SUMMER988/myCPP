@@ -12,8 +12,6 @@ typedef struct LNode {
 
 int main() {
     std::cout << "单链表" << std::endl;
-    auto headNode = new LNode;
-    auto node1 = new LNode(5);
 
     return 0;
 }
