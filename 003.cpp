@@ -18,6 +18,9 @@ int main() {
     auto node3 = new LNode(3);
     auto node4 = new LNode(2);
     auto node5 = new LNode(1);
+    auto node5 = new LNode(1);
+    auto node5 = new LNode(1);
+    auto node5 = new LNode(1);
 
     return 0;
 }
