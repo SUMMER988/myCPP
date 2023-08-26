@@ -18,18 +18,6 @@ int main() {
     auto node3 = new LNode(3);
     auto node4 = new LNode(2);
     auto node5 = new LNode(1);
-    headNode->next = node1;
-    node1->next = node2;
-    node2->next = node3;
-    node3->next = node4;
-    node4->next = node5;
-    auto node = headNode->next;
-    while (node) {
-        cout << node->data;
-        if (node->next) cout << "->";
-        node = node->next;
-    }
-    cout << "\b\b" << endl;
 
     return 0;
 }
