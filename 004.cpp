@@ -14,7 +14,6 @@ int main() {
     std::cout << "单链表" << std::endl;
     auto headNode = new LNode;
     auto node1 = new LNode(5);
-    auto node2 = new LNode(4);
 
     return 0;
 }
