@@ -1,32 +1,26 @@
-#include <iostream>
-#include <ctime>
 #include <algorithm>
+#include <ctime>
+#include <iostream>
 using namespace std;
 typedef int ElemType;
 // 单链表——不带头结点
-typedef struct LNode
-{
+typedef struct LNode {
     ElemType data;
     struct LNode *next;
 } LNode, *LinkList;
-bool InitList(LinkList &L)
-{
+bool InitList(LinkList &L) {
     L = new LNode;
-    if (!L)
-    {
+    if (!L) {
         return false;
     }
     L = NULL;
     return true;
 }
-bool ListInsert(LinkList &L, int pos, ElemType e)
-{
-    if (pos < 1)
-    {
+bool ListInsert(LinkList &L, int pos, ElemType e) {
+    if (pos < 1) {
         return false;
     }
-    if (pos == 1)
-    {
+    if (pos == 1) {
         LNode *s = new LNode;
         s->data = e;
         s->next = L;
@@ -35,13 +29,11 @@ bool ListInsert(LinkList &L, int pos, ElemType e)
     }
     LNode *p = L;
     int j = 1;
-    while (p != nullptr && j < pos - 1)
-    {
+    while (p != nullptr && j < pos - 1) {
         p = p->next;
         j++;
     }
-    if (!p)
-    {
+    if (!p) {
         return false;
     }
     LNode *s = new LNode;
@@ -50,27 +42,20 @@ bool ListInsert(LinkList &L, int pos, ElemType e)
     p->next = s;
     return true;
 }
-void PrintList(LinkList L)
-{
+void PrintList(LinkList L) {
     LNode *p = L;
-    while (p)
-    {
-        if (!p->next)
-        {
+    while (p) {
+        if (!p->next) {
             cout << p->data << endl;
-        }
-        else
-        {
+        } else {
             cout << p->data << "->";
         }
         p = p->next;
     }
 }
 
-bool TailInsert(LinkList &L, ElemType e)
-{
-    if (L == NULL)
-    {
+bool TailInsert(LinkList &L, ElemType e) {
+    if (L == NULL) {
         LNode *s = new LNode;
         s->next = NULL;
         s->data = e;
@@ -79,8 +64,7 @@ bool TailInsert(LinkList &L, ElemType e)
     }
 
     LNode *p = L;
-    while (p->next != NULL)
-    {
+    while (p->next != NULL) {
         p = p->next;
     }
     LNode *s = new LNode;
@@ -92,53 +76,41 @@ bool TailInsert(LinkList &L, ElemType e)
 }
 
 // 判断表是否为空
-bool IsEmpty(LinkList L)
-{
-    return (L == NULL);
-}
+bool IsEmpty(LinkList L) { return (L == NULL); }
 
 // 按值查找
-LNode *LocateElem(LinkList L, ElemType e)
-{
-    if (!L)
-    {
+LNode *LocateElem(LinkList L, ElemType e) {
+    if (!L) {
         return NULL;
     }
     LNode *p = L;
-    while (p && p->data != e)
-    {
+    while (p && p->data != e) {
         p = p->next;
     }
     return p;
 }
 
 // 求表长
-int Length(LinkList L)
-{
+int Length(LinkList L) {
     int len = 0;
-    if (IsEmpty(L))
-    {
+    if (IsEmpty(L)) {
         return len;
     }
     LNode *p = L;
-    while (p)
-    {
+    while (p) {
         len++;
         p = p->next;
     }
     return len;
 }
 // 表逆置
-void ReverseList(LinkList &L)
-{
-    if (!L || !L->next)
-    {
+void ReverseList(LinkList &L) {
+    if (!L || !L->next) {
         return;
     }
     LNode *p = L;
     LNode *s = NULL;
-    while (p)
-    {
+    while (p) {
         L = L->next;
         p->next = s;
         s = p;
@@ -147,16 +119,13 @@ void ReverseList(LinkList &L)
     L = s;
 }
 // 表逆置
-void ReverseList1(LinkList &L)
-{
-    if (!L || !L->next)
-    {
+void ReverseList1(LinkList &L) {
+    if (!L || !L->next) {
         return;
     }
     LNode *p = L;
     LNode *pre = NULL, *q;
-    while (p)
-    {
+    while (p) {
         q = p->next;
         p->next = pre;
         pre = p;
@@ -164,8 +133,7 @@ void ReverseList1(LinkList &L)
     }
     L = pre;
 }
-int main()
-{
+int main() {
     LinkList L;
     InitList(L);
     TailInsert(L, 1);
