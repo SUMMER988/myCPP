@@ -6,8 +6,7 @@
 // Function to generate a random password of specified length
 std::string generateRandomPassword(int length) {
     std::string charset =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
-        "()_+{}[]|:;<>,.?/~";
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     srand(time(nullptr));  // Seed the random number generator
     std::string password;
     for (int i = 0; i < length; ++i) {
