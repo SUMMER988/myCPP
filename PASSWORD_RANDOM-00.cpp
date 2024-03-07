@@ -1,28 +1,39 @@
-#include <cstdlib>
-#include <ctime>
+#include <fstream>
 #include <iostream>
 #include <string>
 
-// Function to generate a random password of specified length
-std::string generateRandomPassword(int length) {
-    std::string charset =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    srand(time(nullptr));  // Seed the random number generator
-    std::string password;
-    for (int i = 0; i < length; ++i) {
-        password += charset[rand() % charset.size()];
+void generateCombinationsToFile(const std::string& input) {
+    std::ofstream outputFile("0228_codes.txt");
+    if (!outputFile.is_open()) {
+        std::cerr << "Error opening file!" << std::endl;
+        return;
     }
-    return password;
+
+    for (char digit = '0'; digit <= '9'; ++digit) {
+        for (char letter = 'a'; letter <= 'z'; ++letter) {
+            std::string result = input;
+            size_t pos = result.find('*');
+            if (pos != std::string::npos) {
+                result[pos] = digit;
+                pos = result.find('*', pos + 1);
+            }
+            if (pos != std::string::npos) {
+                result[pos] = letter;
+                outputFile << result << std::endl;
+            }
+        }
+    }
+
+    outputFile.close();
+    std::cout << "Results saved to 0228_codes.txt" << std::endl;
 }
 
 int main() {
-    int length;
-    std::cout << "Enter the length of the password: ";
-    while (std::cin >> length) {
-        std::string password = generateRandomPassword(length);
-        std::cout << "Generated password: " << password << std::endl;
-        std::cout << "Enter the length of the password (or enter any "
-                     "non-integer value to exit): ";
-    }
+    std::string input;
+    std::cout << "Enter a string with two '*' characters: ";
+    std::cin >> input;
+
+    generateCombinationsToFile(input);
+
     return 0;
 }
