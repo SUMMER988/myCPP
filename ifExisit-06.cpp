@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 
-// Function to read substrings from a file
 std::set<std::string> readSubstringsFromFile(const std::string& filename) {
     std::ifstream file(filename);
     std::set<std::string> substrings;
@@ -38,26 +37,21 @@ fileContainsSubstrings(const std::string& filename,
         return std::make_pair(foundSubstrings, notFoundSubstrings);
     }
 
-    // Iterate over each substring
     for (const auto& substring : substrings) {
         bool found = false;
         file.clear();
-        file.seekg(0, std::ios::beg);  // Reset file pointer to the beginning
+        file.seekg(0, std::ios::beg);
 
         while (std::getline(file, line)) {
-            // Convert the line and substring to lowercase for case-insensitive
-            // comparison
             std::string lowercaseLine = line;
             std::transform(lowercaseLine.begin(), lowercaseLine.end(),
                            lowercaseLine.begin(), ::tolower);
             std::string lowercaseSubstring = substring;
             std::transform(lowercaseSubstring.begin(), lowercaseSubstring.end(),
                            lowercaseSubstring.begin(), ::tolower);
-
             if (lowercaseLine.find(lowercaseSubstring) != std::string::npos) {
                 found = true;
                 foundSubstrings.push_back(substring);
-                break;  // No need to check further if substring is found
             }
         }
         if (!found) {
@@ -73,24 +67,28 @@ int main() {
     std::string filepath =
         "C:\\Users\\admin\\.config\\clash\\profiles\\file-0307.yml";
 
-    // Read substrings from the file "SUBSTRINGS.TXT"
     std::set<std::string> substrings = readSubstringsFromFile("SUBSTRINGS.TXT");
+
+    if (substrings.empty()) {
+        return 1;
+    }
 
     auto results = fileContainsSubstrings(filepath, substrings);
     const auto& foundSubstrings = results.first;
     const auto& notFoundSubstrings = results.second;
 
-    std::ofstream outputFile("RESULTS-00.TXT");
+    std::ofstream outputFile(
+        "C:\\Users\\admin\\.config\\clash\\profiles\\RESULTS_00.TXT");
     if (!outputFile.is_open()) {
-        std::cerr << "Unable to open output file." << std::endl;
+        std::cerr << "Unable to open file : " << std::endl;
         return 1;
     }
 
     std::cout << "Substrings found in file:" << std::endl;
     outputFile << "Substrings found in file:" << std::endl;
-    for (const auto& foundSubstring : foundSubstrings) {
-        std::cout << foundSubstring << std::endl;
-        outputFile << foundSubstring << std::endl;
+    for (const auto& FoundSubstring : foundSubstrings) {
+        std::cout << FoundSubstring << std::endl;
+        outputFile << FoundSubstring << std::endl;
     }
 
     std::cout << "Substrings not found in file:" << std::endl;
@@ -102,7 +100,7 @@ int main() {
 
     outputFile.close();
 
-    std::cout << "Results have been stored in \"RESULTS-00.TXT\"" << std::endl;
+    std::cout << "Results have been stored in file RESULTS_00" << std::endl;
 
     return 0;
 }

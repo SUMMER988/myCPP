@@ -10,7 +10,8 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileBasenameNoExtension}.exe"
+                "${fileBasenameNoExtension}.exe",
+                //"-std=c++17" // c++17
                 // "-fexec-charset=GBK"//解决中文乱码
             ]
         }

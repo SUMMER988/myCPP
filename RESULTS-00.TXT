@@ -1,3 +1,0 @@
-Substrings found in file:
-10000
-Substrings not found in file:
