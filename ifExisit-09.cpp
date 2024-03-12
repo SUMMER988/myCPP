@@ -6,13 +6,12 @@ using namespace std;
 
 int main() {
     string inputFilename =
-        "C:\\Users\\admin\\.config\\clash\\profiles\\shouhou-0311.txt";  // Input
-                                                                         // file
-                                                                         // path
-    string
-        outputFilename =
-            "C:\\Users\\admin\\.config\\clash\\profiles\\modified_shouhou-0311."
-            "txt";  // Output file path
+        "C:\\Users\\admin\\.config\\clash\\profiles\\shouhou.txt";  // Input
+                                                                    // file
+                                                                    // path
+    string outputFilename =
+        "C:\\Users\\admin\\.config\\clash\\profiles\\modified_shouhou."
+        "txt";  // Output file path
     string line;
     ifstream inFile(inputFilename);
 
@@ -28,6 +27,15 @@ int main() {
         return 1;
     }
 
+    // User input for replacements
+    string serverReplacement, passwordReplacement, portReplacement;
+    cout << "Enter replacement for 'server: ': ";
+    getline(cin, serverReplacement);
+    cout << "Enter replacement for 'password: ': ";
+    getline(cin, passwordReplacement);
+    cout << "Enter replacement for 'port: ': ";
+    getline(cin, portReplacement);
+
     // Iterate through each line in the input file
     while (getline(inFile, line)) {
         // Find the position of 'server: '
@@ -39,13 +47,13 @@ int main() {
             size_t url_end = line.find(
                 " ", url_start);  // Find the next space after the website
             if (url_end != string::npos) {
-                // Replace the website with 'XXX.XXX.XXX.XXX'
+                // Replace the website with the user-specified replacement
                 line.replace(url_start, url_end - url_start,
-                             "XXX.XXX.XXX.XXX");  // Replace the website URL
+                             serverReplacement);  // Replace the website URL
             } else {
                 // If URL extends to the end of the line
                 line.replace(url_start, line.length() - url_start,
-                             "XXX.XXX.XXX.XXX");
+                             serverReplacement);
             }
         }
 
@@ -59,13 +67,32 @@ int main() {
             size_t password_end = line.find(
                 " ", password_start);  // Find the next space after the password
             if (password_end != string::npos) {
-                // Replace the password with 'XXXXYYYY-XXXX-YYYY-XXXXYYYYZZZZ'
+                // Replace the password with the user-specified replacement
                 line.replace(password_start, password_end - password_start,
-                             "XXXXYYYY-XXXX-YYYY-XXXXYYYYZZZZ");
+                             passwordReplacement);
             } else {
                 // If password extends to the end of the line
                 line.replace(password_start, line.length() - password_start,
-                             "XXXXYYYY-XXXX-YYYY-XXXXYYYYZZZZ");
+                             passwordReplacement);
+            }
+        }
+
+        // Find the position of 'port: '
+        size_t port_found = line.find("port: ");
+        if (port_found != string::npos) {
+            // Find the start of the port
+            size_t port_start = port_found + 6;  // Position after "port: "
+            // Find the end of the port
+            size_t port_end = line.find(
+                " ", port_start);  // Find the next space after the port
+            if (port_end != string::npos) {
+                // Replace the port with the user-specified replacement
+                line.replace(port_start, port_end - port_start,
+                             portReplacement);
+            } else {
+                // If port extends to the end of the line
+                line.replace(port_start, line.length() - port_start,
+                             portReplacement);
             }
         }
 

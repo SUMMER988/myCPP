@@ -64,18 +64,7 @@ void printMatchingFiles(
                   << std::endl;
     }
 }
-void printFile(const std::string& filePath) {
-    std::ifstream file(filePath);
-    if (file.is_open()) {
-        std::string line;
-        while (std::getline(file, line)) {
-            std::cout << line << std::endl;
-        }
-        file.close();
-    } else {
-        std::cerr << "Failed to open file: " << filePath << std::endl;
-    }
-}
+
 int main() {
     std::string folderPath = "C:\\Users\\admin\\.config\\clash\\profiles";
     std::vector<std::string> fileNamesToSearch;
@@ -113,9 +102,7 @@ int main() {
     }
 
     std::cout << "Files containing the specified strings:" << std::endl;
-    std::string filePath = "D:\\00FILES\\namesOfFile.txt";
-
-    printFile(filePath);
+    printMatchingFiles(matchingFiles);
 
     return 0;
 }
